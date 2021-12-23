@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.fjhidalgo.dxctechnology.databinding.ActivityMainBinding
+import com.fjhidalgo.dxctechnology.module.main.viewModel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var mainActivityViewModel: MainActivityViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         setListener()
     }
 
@@ -28,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
 
-                //Do find flickr get photos android
+                mainActivityViewModel!!.getSearchWord(binding.etFind.text.toString())
 
                 val imm: InputMethodManager =
                     getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -39,5 +43,10 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
+    }
+
+    private fun subscribeObservers() {
+
+
     }
 }
