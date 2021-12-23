@@ -1,6 +1,7 @@
 package com.fjhidalgo.dxctechnology.module.main.view
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import com.fjhidalgo.dxctechnology.data.network.model.ImageModel
 import com.fjhidalgo.dxctechnology.databinding.ActivityMainBinding
 import com.fjhidalgo.dxctechnology.module.main.adapter.ImagesAdapter
 import com.fjhidalgo.dxctechnology.module.main.viewModel.MainActivityViewModel
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +56,8 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
+
+
     }
 
     private fun setRecyclerImages(){
@@ -93,5 +97,16 @@ class MainActivity : AppCompatActivity() {
 
             binding.viewNotResult.visibility = View.VISIBLE
         })
+    }
+
+    fun showDetailItem( image: ImageModel){
+
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("title", image.title)
+        intent.putExtra("author", image.author)
+        intent.putExtra("published", image.published)
+        intent.putExtra("description", image.description)
+        intent.putExtra("urlImage", image.media?.get("m").toString().replace("\"", ""))
+        startActivity(intent)
     }
 }

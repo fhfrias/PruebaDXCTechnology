@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fjhidalgo.dxctechnology.R
 import com.fjhidalgo.dxctechnology.data.network.model.ImageModel
+import com.fjhidalgo.dxctechnology.module.main.view.MainActivity
 import com.fjhidalgo.dxctechnology.module.main.viewHolder.ImageViewHolder
 
 class ImagesAdapter(private val context: Context,
@@ -20,6 +21,10 @@ class ImagesAdapter(private val context: Context,
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         holder.bind(context, imageList[position], position, activity)
+        holder.itemView.setOnClickListener {
+
+            (activity as MainActivity).showDetailItem(imageList[position])
+        }
     }
 
     override fun getItemCount(): Int {

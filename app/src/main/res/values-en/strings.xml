@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">DXC Technology</string>
     <string name="search">Find</string>
+    <string name="back">Back</string>
 </resources>
